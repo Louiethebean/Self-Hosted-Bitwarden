@@ -1,6 +1,10 @@
 # 🛠️ Bitwarden Self-Hosting via Docker + Cloudflare Tunnel (Step-by-Step Guide)
 
+![License](https://img.shields.io/badge/license-MIT-blue) ![Platform](https://img.shields.io/badge/platform-Ubuntu-orange) ![Tool](https://img.shields.io/badge/tool-Bitwarden%20%2B%20Cloudflare-5e60ce)
+
 This guide outlines the exact steps taken to install and expose a **self-hosted Bitwarden instance** on Ubuntu using **Docker** and **Cloudflare Tunnel**, without needing a public IP.
+
+![Architecture](./architecture.svg)
 
 ---
 
