@@ -198,6 +198,17 @@ You now have a fully encrypted, self-hosted Bitwarden instance accessible from a
 
 ---
 
+## 🎯 What I Learned / Skills Demonstrated
+
+- **Zero-exposure networking** — using Cloudflare Tunnel to expose a service without opening any inbound firewall port or needing a public IP, versus the traditional port-forward approach.
+- **Certificate troubleshooting under real constraints** — the standalone Let's Encrypt challenge failed due to CG-NAT, so I switched to the DNS-01 challenge instead of giving up or weakening security.
+- **Reverse proxy + container networking** — mounting external SSL certs into an nginx container and wiring Docker Compose overrides without editing the vendor's base config.
+- **Self-hosting tradeoffs** — what you gain (no third-party vault custody) and what you take on (you are now the ops team) when self-hosting a password manager.
+
+**Problem solved:** secure, internet-accessible self-hosted Bitwarden with no public IP and no open ports — and a documented workaround for the CG-NAT certificate issue that actually came up during setup.
+
+---
+
 ## 📄 License
 
 This guide is licensed under the MIT License. See [LICENSE](./MIT%20License.txt) for details.
