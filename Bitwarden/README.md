@@ -191,3 +191,9 @@ https://bitwarden.your-domain.com/admin
 ## ✅ Done!
 
 You now have a fully encrypted, self-hosted Bitwarden instance accessible from anywhere — without needing a public IP.
+
+---
+
+## 📄 License
+
+This guide is licensed under the MIT License. See [LICENSE](./MIT%20License.txt) for details.
