@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "name": "Example Bank",
+      "login": {
+        "password": "Tr0ub4dor&3xampleStrong!",
+        "uris": [{"uri": "https://bank.example.com"}]
+      },
+      "revisionDate": "2026-05-01T00:00:00.000Z"
+    },
+    {
+      "name": "Old Forum Account",
+      "login": {
+        "password": "password123",
+        "uris": [{"uri": "https://forum.example.com"}]
+      },
+      "revisionDate": "2023-01-01T00:00:00.000Z"
+    },
+    {
+      "name": "Streaming Service A",
+      "login": {
+        "password": "password123",
+        "uris": [{"uri": "https://streaminga.example.com"}]
+      },
+      "revisionDate": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "name": "Streaming Service B",
+      "login": {
+        "password": "password123",
+        "uris": [{"uri": "https://streamingb.example.com"}]
+      },
+      "revisionDate": "2026-04-01T00:00:00.000Z"
+    },
+    {
+      "name": "Secure Note (no login)",
+      "login": {}
+    }
+  ]
+}
