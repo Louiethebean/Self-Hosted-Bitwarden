@@ -1,4 +1,4 @@
-# 🛠️ Bitwarden Self-Hosting via Docker + Cloudflare Tunnel (Step-by-Step Guide)
+# Bitwarden Self-Hosting via Docker + Cloudflare Tunnel (Step-by-Step Guide)
 
 ![License](https://img.shields.io/badge/license-MIT-blue) ![Platform](https://img.shields.io/badge/platform-Ubuntu-orange) ![Tool](https://img.shields.io/badge/tool-Bitwarden%20%2B%20Cloudflare-5e60ce)
 
@@ -8,7 +8,7 @@ This guide outlines the exact steps taken to install and expose a **self-hosted 
 
 ---
 
-## 🔧 System Environment
+## System Environment
 
 - OS: Ubuntu 24.04
 - User: `bitwarden`
@@ -18,7 +18,7 @@ This guide outlines the exact steps taken to install and expose a **self-hosted 
 
 ---
 
-## ✅ Step 1: Install Docker & Docker Compose
+## Step 1: Install Docker & Docker Compose
 
 ```bash
 sudo apt update
@@ -29,7 +29,7 @@ newgrp docker
 
 ---
 
-## ✅ Step 2: Install Bitwarden (Self-Hosted)
+## Step 2: Install Bitwarden (Self-Hosted)
 
 ```bash
 curl -Lso bitwarden.sh https://go.btwrdn.co/bw-sh   && chmod +x bitwarden.sh   && ./bitwarden.sh install
@@ -42,7 +42,7 @@ During setup:
 
 ---
 
-## ✅ Step 3: Generate Let's Encrypt SSL Cert
+## Step 3: Generate Let's Encrypt SSL Cert
 
 Certbot standalone challenge failed due to CG-NAT, so used DNS challenge:
 
@@ -55,7 +55,7 @@ Follow prompts to set a TXT record at your DNS provider.
 
 ---
 
-## ✅ Step 4: Copy SSL Files
+## Step 4: Copy SSL Files
 
 ```bash
 sudo mkdir -p /etc/ssl/bitwarden.your-domain.com
@@ -67,7 +67,7 @@ sudo chmod 644 /etc/ssl/bitwarden.your-domain.com/*
 
 ---
 
-## ✅ Step 5: Configure Bitwarden to Use SSL
+## Step 5: Configure Bitwarden to Use SSL
 
 Edit `~/bwdata/env/global.override.env`:
 
@@ -79,7 +79,7 @@ globalSettings__ssl__certificateKeyPath=/etc/ssl/bitwarden.your-domain.com/priva
 
 ---
 
-## ✅ Step 6: Mount SSL Files via Docker Override
+## Step 6: Mount SSL Files via Docker Override
 
 Create or edit `~/bwdata/docker/docker-compose.override.yml`:
 
@@ -93,7 +93,7 @@ services:
 
 ---
 
-## ✅ Step 7: Rebuild and Start Bitwarden
+## Step 7: Rebuild and Start Bitwarden
 
 ```bash
 cd ~/bwdata/..
@@ -103,7 +103,7 @@ cd ~/bwdata/..
 
 ---
 
-## ✅ Step 8: Install Cloudflared (Tunnel)
+## Step 8: Install Cloudflared (Tunnel)
 
 ```bash
 wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
@@ -112,7 +112,7 @@ sudo dpkg -i cloudflared-linux-amd64.deb
 
 ---
 
-## ✅ Step 9: Set Up Cloudflare Tunnel
+## Step 9: Set Up Cloudflare Tunnel
 
 1. **Login:**
 
@@ -134,7 +134,7 @@ cloudflared tunnel route dns bitwarden-tunnel bitwarden.your-domain.com
 
 ---
 
-## ✅ Step 10: Configure and Run the Tunnel
+## Step 10: Configure and Run the Tunnel
 
 Create `/etc/cloudflared/config.yml`:
 
@@ -160,7 +160,7 @@ cloudflared tunnel run bitwarden-tunnel
 
 ---
 
-## ✅ Step 11: Access Bitwarden
+## Step 11: Access Bitwarden
 
 Visit:
 ```
@@ -171,7 +171,7 @@ Create an account and log in.
 
 ---
 
-## ✅ (Optional) Enable Admin Portal
+## (Optional) Enable Admin Portal
 
 Add to `global.override.env`:
 
@@ -192,13 +192,13 @@ https://bitwarden.your-domain.com/admin
 
 ---
 
-## ✅ Done!
+## Done!
 
 You now have a fully encrypted, self-hosted Bitwarden instance accessible from anywhere — without needing a public IP.
 
 ---
 
-## 🎯 What I Learned / Skills Demonstrated
+## What I Learned / Skills Demonstrated
 
 - **Zero-exposure networking** — using Cloudflare Tunnel to expose a service without opening any inbound firewall port or needing a public IP, versus the traditional port-forward approach.
 - **Certificate troubleshooting under real constraints** — the standalone Let's Encrypt challenge failed due to CG-NAT, so I switched to the DNS-01 challenge instead of giving up or weakening security.
@@ -209,6 +209,6 @@ You now have a fully encrypted, self-hosted Bitwarden instance accessible from a
 
 ---
 
-## 📄 License
+## License
 
 This guide is licensed under the MIT License. See [LICENSE](./MIT%20License.txt) for details.
