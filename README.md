@@ -198,6 +198,31 @@ You now have a fully encrypted, self-hosted Bitwarden instance accessible from a
 
 ---
 
+## Tooling: Vault Hygiene Audit
+
+Self-hosting solves *where* your vault lives, not *what's in it*. `scripts/bitwarden_vault_audit.py` scans a `bw export` and flags reused, weak, and stale passwords — without ever printing, logging, or persisting an actual password value.
+
+```bash
+bw export --format json --output vault_export.json
+python scripts/bitwarden_vault_audit.py vault_export.json --min-length 12 --max-age-days 365 --format md
+```
+
+What it does:
+- Hashes each password (SHA-256) the instant it's read and discards the plaintext immediately — the report can prove two vault items share a password without ever revealing what that password is
+- Flags reused passwords by grouping on hash, not on guesswork
+- Flags weak passwords (short, or missing character class diversity) without needing the actual value to judge it
+- Flags stale entries that haven't been rotated within a configurable window, using the export's `revisionDate`
+- Outputs Markdown for a quick read or CSV for tracking remediation
+
+Run the test suite (uses a synthetic sample export with fake, throwaway credentials — note one test asserts directly that no password value ever appears in the generated report):
+
+```bash
+pip install pytest
+pytest tests/
+```
+
+---
+
 ## What I Learned / Skills Demonstrated
 
 - **Zero-exposure networking** — using Cloudflare Tunnel to expose a service without opening any inbound firewall port or needing a public IP, versus the traditional port-forward approach.
